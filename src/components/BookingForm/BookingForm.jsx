@@ -26,9 +26,7 @@ function BookingForm(prop) {
    function handleSubmit(e) { 
       e.preventDefault()
       if (!isFormValid()){ return; }
-      console.log("handleSubmit")
       updateTime({type: 'selected-date-time', date: formInfo['res-date'], time:formInfo['res-time']})
-      console.log("updateTime done")
       submit(null,formInfo)
    } 
 

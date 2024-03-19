@@ -13,7 +13,7 @@ const useUpdateTimeReducer = () => {
          return { availableTimes: temp }
       } else if (action.type == "initialize-availableTimes"){
          if (state.availableTimes.length == 0){
-            let temp = [ ]
+            let temp = []
             for (let i=0; i< action.data.length; i++){
                temp.push(`${action.data[i].date} ${action.data[i].time}`)
             }
