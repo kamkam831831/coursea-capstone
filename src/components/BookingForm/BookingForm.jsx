@@ -59,7 +59,7 @@ function BookingForm(prop) {
    return (
       <form role="Booking Form" style={{display: 'grid',maxWidth: '200px', gap: '10px', margin:'20px 40px'}}  onSubmit={formik.handleSubmit}>
          <h1>Book Now</h1>
-         <label htmlFor="date">Choose date*</label>
+         <label aria-label="Choose date" htmlFor="date">Choose date *</label>
          <DatePicker 
             role="Booking Form Date Picker"
             selected={formik.values.date}
@@ -74,7 +74,7 @@ function BookingForm(prop) {
             }}
             onBlur={formik.handleBlur}/>
             <LocalError touched={formik.touched.date} error={formik.touched.date && formik.errors.date ? formik.errors.date : null} />
-         <label htmlFor="time">Choose time</label>
+         <label aria-label="Choose time" htmlFor="time">Choose time *</label>
          <select id="time" 
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

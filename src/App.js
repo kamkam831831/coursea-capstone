@@ -42,8 +42,6 @@ function App() {
     useEffect(() => {
 
       if (data && !isDataReceived){
-        console.log('data received :' + isDataReceived)
-        console.log(data)
         setIsDataReceived(true)
         updateTime({type: 'initialize-availableTimes', data: data.availableTime})
         
@@ -57,15 +55,14 @@ function App() {
         <title>My Page Title</title>
         <meta name="description" content="This is a description of my page" />
         <meta name="keywords" content="react, meta tags, seo" />
-        <meta name="author" content="Your Name" />
-        <meta property="og:title" content="My Page Title" />
-        <meta property="og:description" content="This is a description of my page" />
-        <meta property="og:image" content="https://example.com/image.jpg" />
-        <meta property="og:url" content="https://example.com/my-page" />
-        <meta name="twitter:title" content="My Page Title" />
-        <meta name="twitter:description" content="This is a description of my page" />
-        <meta name="twitter:image" content="https://example.com/image.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="author" content="Asher" />
+        <meta property="og:title" content="Little Lemon" />
+        <meta property="og:description" content="This is the web site of Little Lemon" />
+        <meta property="og:image" content="./logo.svg" />
+        <meta property="og:url" content="https://example.com/little-lemon" />
+        <meta name="twitter:title" content="Little Lemon" />
+        <meta name="twitter:description" content="This is the web site of Little Lemon"/>
+        <meta name="twitter:image" content="./logo.svg" />
       </Helmet>
       <RouterProvider router={router} />
     </React.Fragment>
