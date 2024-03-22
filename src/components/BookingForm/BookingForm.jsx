@@ -26,14 +26,16 @@ function BookingForm(prop) {
          handleSubmit(values)
       },
       validationSchema: Yup.object({}).shape({
-         date: Yup.string().required("Required"),
-         time: Yup.string().required("Required"),
+         date: Yup.string().required("Date is required").test('value must be larger than 0 and smaller then 11', function (f) {
+            return f >= 1 && f <= 10;
+          }),
+         time: Yup.string().required("Time is required"),
          guests: Yup.number()
-         .required()
+         .required("Number of guest is required")
          .test('value must be larger than 0 and smaller then 11', function (f) {
            return f >= 1 && f <= 10;
          }),
-         occasion: Yup.string().required(),
+         occasion: Yup.string().required("Occasion is required"),
       })
    });
    
@@ -73,36 +75,38 @@ function BookingForm(prop) {
                formik.setFieldValue('date', Date.parse(value));
             }}
             onBlur={formik.handleBlur}/>
-            <LocalError touched={formik.touched.date} error={formik.touched.date && formik.errors.date ? formik.errors.date : null} />
+            <LocalError aria-label="date error" touched={formik.touched.date} error={formik.touched.date && formik.errors.date ? formik.errors.date : null} />
          <label aria-label="Choose time" htmlFor="time">Choose time *</label>
          <select id="time" 
+            role="Booking Form Time"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.time}>
             <option disabled></option>
-            <option disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 17:00`)}>17:00</option>
-            <option disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 18:00`)}>18:00</option>
-            <option disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 19:00`)}>19:00</option>
-            <option disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 20:00`)}>20:00</option>
-            <option disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 21:00`)}>21:00</option>
-            <option disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 22:00`)}>22:00</option>
+            <option aria-label="17:00" disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 17:00`)}>17:00</option>
+            <option aria-label="18:00" disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 18:00`)}>18:00</option>
+            <option aria-label="19:00" disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 19:00`)}>19:00</option>
+            <option aria-label="20:00" disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 20:00`)}>20:00</option>
+            <option aria-label="21:00" disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 21:00`)}>21:00</option>
+            <option aria-label="22:00" disabled={formik.values.date == null ? true : !availableTimes.includes(`${(new Date(formik.values.date)).toISOString().split('T')[0]} 22:00`)}>22:00</option>
          </select>
-            <LocalError touched={formik.touched.time} error={formik.touched.time && formik.errors.time ? formik.errors.time : null} />
+            <LocalError aria-label="time error" touched={formik.touched.time} error={formik.touched.time && formik.errors.time ? formik.errors.time : null} />
          <label htmlFor="guests">Number of guests</label>
-         <input type="number" placeholder="1" id="guests" 
+         <input role="Booking Form Guest" type="number" placeholder="1" id="guests" 
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.guests}/>
-            <LocalError touched={formik.touched.guests} error={formik.touched.guests && formik.errors.guests ? formik.errors.guests : null} />
+            <LocalError aria-label="guests error" touched={formik.touched.guests} error={formik.touched.guests && formik.errors.guests ? formik.errors.guests : null} />
          <label htmlFor="occasion">Occasion</label>
          <select id="occasion" 
+            role="Booking Form occasion"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.occasion}>
             <option>Birthday</option>
             <option>Anniversary</option>
          </select>
-            <LocalError touched={formik.touched.occasion} error={formik.touched.occasion && formik.errors.occasion ? formik.errors.occasion : null} />
+            <LocalError aria-label="occasion error" touched={formik.touched.occasion} error={formik.touched.occasion && formik.errors.occasion ? formik.errors.occasion : null} />
          <button type="submit" value="Make Your reservation" role="button" arial-label="Make Your reservation" disabled={isLoading}/>
       </form>
    );
